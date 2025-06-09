@@ -7,30 +7,33 @@ export interface EmailData {
 
 export const sendEmail = async (emailData: EmailData): Promise<boolean> => {
   try {
-    console.log('🚀 Sending email request...');
-    
+    console.log("🚀 Sending email request...");
+
     // Since you're using Vite proxy, you can just use /api
-    const response = await fetch('/api/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(emailData),
-    });
+    const response = await fetch(
+      "https://bus-bee-backend.onrender.com/api/send-email",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(emailData),
+      }
+    );
 
     const responseData = await response.json();
-    console.log('📧 Email response:', responseData);
+    console.log("📧 Email response:", responseData);
 
     if (response.ok && responseData.success) {
-      console.log('✅ Email sent successfully!');
+      console.log("✅ Email sent successfully!");
       return true;
     } else {
-      console.error('❌ Failed to send email:', responseData.message);
+      console.error("❌ Failed to send email:", responseData.message);
       return false;
     }
   } catch (error) {
-    console.error('💥 Error sending email:', error);
+    console.error("💥 Error sending email:", error);
     return false;
   }
 };
@@ -64,15 +67,21 @@ export const generateContactEmailTemplate = (formData: any) => {
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Email:</td>
-                <td style="padding: 8px 0; color: #666;"><a href="mailto:${formData.email}">${formData.email}</a></td>
+                <td style="padding: 8px 0; color: #666;"><a href="mailto:${
+                  formData.email
+                }">${formData.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-                <td style="padding: 8px 0; color: #666;"><a href="tel:${formData.phone}">${formData.phone}</a></td>
+                <td style="padding: 8px 0; color: #666;"><a href="tel:${
+                  formData.phone
+                }">${formData.phone}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Subject:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.subject}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.subject
+                }</td>
               </tr>
             </table>
           </div>
@@ -80,7 +89,9 @@ export const generateContactEmailTemplate = (formData: any) => {
           <div style="background-color: #f9f9f9; padding: 25px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #000;">
             <h2 style="color: #000; margin: 0 0 20px 0; font-size: 20px;">💬 Message</h2>
             <div style="background-color: white; padding: 20px; border-radius: 5px; border: 1px solid #ddd;">
-              <p style="color: #333; line-height: 1.6; margin: 0; white-space: pre-wrap;">${formData.message}</p>
+              <p style="color: #333; line-height: 1.6; margin: 0; white-space: pre-wrap;">${
+                formData.message
+              }</p>
             </div>
           </div>
 
@@ -128,15 +139,23 @@ export const generateCommercialEmailTemplate = (formData: any) => {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333; width: 30%;">Name:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.firstName} ${formData.middleName ? formData.middleName + ' ' : ''}${formData.lastName}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.firstName
+                } ${formData.middleName ? formData.middleName + " " : ""}${
+    formData.lastName
+  }</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Email:</td>
-                <td style="padding: 8px 0; color: #666;"><a href="mailto:${formData.email}">${formData.email}</a></td>
+                <td style="padding: 8px 0; color: #666;"><a href="mailto:${
+                  formData.email
+                }">${formData.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Mobile:</td>
-                <td style="padding: 8px 0; color: #666;"><a href="tel:${formData.mobile}">${formData.mobile}</a></td>
+                <td style="padding: 8px 0; color: #666;"><a href="tel:${
+                  formData.mobile
+                }">${formData.mobile}</a></td>
               </tr>
             </table>
           </div>
@@ -146,15 +165,21 @@ export const generateCommercialEmailTemplate = (formData: any) => {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333; width: 30%;">Pickup Location:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.pickupLocation}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.pickupLocation
+                }</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Office Address:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.officeAddress}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.officeAddress
+                }</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Office Hours:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.officeStartTime} - ${formData.officeEndTime}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.officeStartTime
+                } - ${formData.officeEndTime}</td>
               </tr>
             </table>
           </div>
@@ -203,15 +228,23 @@ export const generateStudentEmailTemplate = (formData: any) => {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333; width: 30%;">Name:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.firstName} ${formData.middleName ? formData.middleName + ' ' : ''}${formData.lastName}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.firstName
+                } ${formData.middleName ? formData.middleName + " " : ""}${
+    formData.lastName
+  }</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Email:</td>
-                <td style="padding: 8px 0; color: #666;"><a href="mailto:${formData.email}">${formData.email}</a></td>
+                <td style="padding: 8px 0; color: #666;"><a href="mailto:${
+                  formData.email
+                }">${formData.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Mobile:</td>
-                <td style="padding: 8px 0; color: #666;"><a href="tel:${formData.mobile}">${formData.mobile}</a></td>
+                <td style="padding: 8px 0; color: #666;"><a href="tel:${
+                  formData.mobile
+                }">${formData.mobile}</a></td>
               </tr>
             </table>
           </div>
@@ -221,15 +254,21 @@ export const generateStudentEmailTemplate = (formData: any) => {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333; width: 30%;">School Name:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.schoolName}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.schoolName
+                }</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">School Hours:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.schoolStartTime} - ${formData.schoolEndTime}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.schoolStartTime
+                } - ${formData.schoolEndTime}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Pickup Location:</td>
-                <td style="padding: 8px 0; color: #666;">${formData.pickupLocation}</td>
+                <td style="padding: 8px 0; color: #666;">${
+                  formData.pickupLocation
+                }</td>
               </tr>
             </table>
           </div>
