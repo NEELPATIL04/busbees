@@ -4,22 +4,22 @@ export interface EmailData {
   subject: string;
   html: string;
 }
-const apiUrl = import.meta.env.PROD
-  ? "https://bus-bee-backend.onrender.com/api/send-email"
-  : "/api/send-email";
 export const sendEmail = async (emailData: EmailData): Promise<boolean> => {
   try {
     console.log("🚀 Sending email request...");
 
     // Since you're using Vite proxy, you can just use /api
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(emailData),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/send-email`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(emailData),
+      }
+    );
 
     const responseData = await response.json();
     console.log("📧 Email response:", responseData);
