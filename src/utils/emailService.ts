@@ -10,7 +10,7 @@ export const sendEmail = async (emailData: EmailData): Promise<boolean> => {
 
     // Since you're using Vite proxy, you can just use /api
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/send-email`,
+      `https://bus-bee-backend.onrender.com/api/send-email`,
       {
         method: "POST",
         headers: {
